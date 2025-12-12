@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Google Drive Link Converter</title>
+<style>
+    body { font-family: Arial; padding: 30px; max-width: 500px; margin: auto; }
+    input, button { width: 100%; padding: 10px; margin-top: 10px; font-size: 16px; }
+    .output { margin-top: 20px; padding: 10px; background: #f3f3f3; word-break: break-all; }
+</style>
+</head>
+<body>
+
+<h2>Google Drive Public Link Converter</h2>
+
+<input type="text" id="inputLink" placeholder="Paste your Google Drive link here">
+
+<button onclick="convertLink()">Convert to Public Link</button>
+
+<div class="output" id="result">Your converted link will appear here...</div>
+
+<script>
+function convertLink() {
+    let url = document.getElementById("inputLink").value.trim();
+
+    // Extract File ID
+    const match = url.match(/\/d\/(.*?)\//);
+    if (!match) {
+        document.getElementById("result").innerText = "Invalid Google Drive link";
+        return;
+    }
+    const fileId = match[1];
+
+    // Convert to public link
+    const publicLink = `https://lh3.googleusercontent.com/d/${fileId}`;
+
+    document.getElementById("result").innerHTML = 
+        `<b>Public Link:</b><br><a href="${publicLink}" target="_blank">${publicLink}</a>`;
+}
+</script>
+
+</body>
+</html>
